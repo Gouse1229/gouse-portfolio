@@ -31,12 +31,11 @@ const Projects = () => {
       responsible for mining and transforming large-scale DNS-related data. 
       The UI and API modules consume and present the mined data through user-friendly 
       interfaces and secured RESTful services, enabling users to interact with DNS insights efficiently`
-      
       ],
       responsibilities: [
-        'Developed and enhanced RESTful APIs with Spring Boot, ensuring high availability, security, and low-latency responses.',
-        'Creating New menu items to the UI applications',
-        'Creating or optimizing the PL/SQL procedures',
+        'Developed and enhanced RESTful APIs using Spring Boot, focusing on high availability, security, and performance',
+        'Created and integrated new menu items and features in the UI application for improved user interaction',
+        'Designed, optimized, and maintained PL/SQL procedures to support efficient backend data operations',
       ],
       tech: ['Core Java', 'HTML', 'CSS', 'JavaScript', 'Spring boot', 'GSP', 'RESTful Web Services','Oracle','Groovy Grails', 'Spring Batch'],
       honors: 'Received Shout-outs',
@@ -51,11 +50,10 @@ const Projects = () => {
         'TeamConnect is an Enterprise Legal Management (ELM) software for legal operations, combining matter management, e-billing, legal spend management, document management, and reporting.',
       ],
       responsibilities: [
-        'Groomed and developed new features based on specifications, identifying edge cases and suggesting improvements.',
-        'Collaborated with UI/UX teams to enhance user experience.',
-        'Wrote unit and integration tests, and performed code/peer reviews.',
-        'Participated in agile activities.',
-        'Provided knowledge transfer to the support team, clarifying questions about new features.',
+        'Groomed and developed new features based on specifications, identifying edge cases and suggesting improvements',
+        'Collaborated with UI/UX teams to enhance user experience',
+        'Wrote unit and integration tests, and performed code/peer reviews', 
+        'Participated in agile activities. Provided knowledge transfer to the support team, clarifying questions about new features'
       ],
       tech: ['Core Java', 'HTML', 'CSS', 'JavaScript', 'jQuery', 'JSP', 'RESTful Web Services', 'Spring Core', 'Spring MVC'],
       honors: 'Received POB(Pat-On-the-Back) Award(Nov 2024)',
@@ -67,11 +65,11 @@ const Projects = () => {
       duration: 'Dec 2019 – Nov 2021',
       description: ['CMIX is a survey tool used to create and host surveys.'],
       responsibilities: [
-        'Analyzed, designed, and developed survey questionnaires.',
-        'Tested developed surveys for accuracy.',
-        'Coordinated with clients via project manager to resolve questionnaire concerns.',
-        'Provided error-free survey links for client verification, updating surveys based on change requests.',
-        'Verified data post-soft launch and resolved issues.',
+        'Analyzed, designed, and developed survey questionnaires',
+        'Tested developed surveys for accuracy',
+        'Coordinated with clients via project manager to resolve questionnaire concerns',
+        'Provided error-free survey links for client verification, updating surveys based on change requests',
+        'Verified data post-soft launch and resolved issues',
       ],
       tech: ['CMIX', 'Java', 'HTML', 'CSS', 'JavaScript', 'jQuery'],
       honors: 'Received Team Impact Award',
