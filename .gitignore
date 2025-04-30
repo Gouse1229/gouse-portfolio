@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 .env
-src/assets/Resume.pdf
 
 # Editor directories and files
 .vscode/*
