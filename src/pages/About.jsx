@@ -60,7 +60,7 @@ const About = () => {
             <FaUserCircle className="mr-2 text-teal-500" /> Who Am I?
           </h3>
           <p className="text-gray-600 text-sm sm:text-base">
-            I'm a Full Stack Developer with an engineering mindset, originally trained in Electrical and Electronics Engineering and now passionate about building end-to-end web solutions. I specialize in Java, Spring Boot, React, and SQL, with a strong focus on writing clean, efficient code and building scalable backend systems. I enjoy working across the stack — from designing RESTful APIs and optimizing database logic to enhancing frontend functionality with interactive, user-friendly interfaces.
+            I'm a Full Stack Developer with an engineering mindset, originally trained in Electrical and Electronics Engineering and now passionate about building end-to-end web solutions. I specialize in Java and Spring Boot, with a strong focus on writing clean, efficient code and building scalable backend systems. I enjoy working across the stack — from designing RESTful APIs and optimizing database logic to enhancing frontend functionality with interactive, user-friendly interfaces.
             Always curious and continuously learning, I enjoy collaborating with forward-thinking teams to build tech that makes a difference.
           </p>
         </motion.div>
@@ -93,7 +93,7 @@ const About = () => {
                   <span className="block">JNTU, Kakinada</span>
                 </div>
                 <p className="text-sm font-semibold text-teal-600 mt-1">
-                  Ranked First
+                  First Class With Distinction
                 </p>
               </div>
             </motion.div>
@@ -114,10 +114,13 @@ const About = () => {
                   <span className="block">Andhra Polytechnic, Kakinada</span>
                   <span className="block">State Board of Technical Education, Andhra Pradesh</span>
                 </div>
+                <p className="text-sm font-semibold text-teal-600 mt-1">
+                  First Class With Distinction
+                </p>
               </div>
             </motion.div>
 
-            <motion.div
+            {/* <motion.div
               variants={educationCard}
               whileHover={{ scale: 1.05, borderColor: '#0d9488' }}
               className="flex-1 bg-gradient-to-r from-teal-50 to-white p-4 rounded-md border-l-4 border-teal-500 min-h-[120px] sm:min-h-[120px] flex flex-col"
@@ -137,7 +140,7 @@ const About = () => {
                   Secured Second Rank
                 </p>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </motion.div>
 
