@@ -104,7 +104,7 @@ const Skills = () => {
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-5 gap-4 sm:gap-6"
+            className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-6"
           >
             {category.skills.map((skill, skillIndex) => (
               <motion.div
