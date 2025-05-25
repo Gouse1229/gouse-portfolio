@@ -169,8 +169,8 @@ const About = () => {
               <div className="absolute left-[-28px] top-1 w-4 h-4 bg-teal-500 rounded-full border-2 border-white"></div>
               <p className="text-gray-600 text-sm sm:text-base">
                 <strong>Software Engineer, Mitratech India LLP (Nov 2021–Mar 2024)</strong><br />
-                - Reduced time spent by e-billing admins for tracking, reviewing, and approving timekeeper and rates by providing a single-step process with increased visibility and tracking for new timekeeper with rates approvals.<br />
-                - Reduced payment delays between legal departments and firms with improved e-billing workflows for invoices, rates, and expanded timekeeper classifications.
+                - Developed and enhanced workflow wizards using Spring MVC and RESTful Web Services to reduce time delays and improve process efficiency.<br />
+                - Enhanced existing UI by adding new fields, modifying data tables, and improving responsiveness using HTML, CSS, and JavaScript.
               </p>
             </motion.div>
 
