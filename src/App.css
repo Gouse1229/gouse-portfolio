@@ -24,3 +24,76 @@ footer {
   text-align: center; /* Center the text */
   padding: 20px; /* Optional: add padding to the footer */
 }
+
+
+/* Root variable for footer height */
+:root {
+  --footer-height: 5rem; /* Fallback */
+}
+
+/* Chatbot animations */
+.message {
+  animation: bubble-pop 0.5s ease-out, wobble 2s ease-in-out infinite;
+}
+@keyframes bubble-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes wobble {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(-3px) rotate(-1deg); }
+}
+
+/* Chat widget pulse */
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Loading spinner */
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Chat button responsive positioning */
+.chat-button {
+  bottom: calc(var(--footer-height) + 1rem); /* Desktop */
+}
+@media (max-width: 768px) {
+  .chat-button {
+    bottom: calc(var(--footer-height) + 2.5rem); /* Tablet */
+  }
+}
+@media (max-width: 640px) {
+  .chat-button {
+    bottom: calc(var(--footer-height) + 2rem); /* Mobile */
+  }
+}
+
+/* Chat window styles */
+.chat-window {
+  max-width: 360px;
+  min-width: 180px;
+  border: 1px solid #2dd4bf;
+}
+
+/* Responsive chat window */
+@media (max-width: 640px) {
+  .chat-window {
+    width: 70vw;
+    min-width: 160px;
+  }
+}
