@@ -8,6 +8,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Skills from './pages/Skills';
+import NewChatbot from './components/NewChatbot'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <NewChatbot/>
     </div>
   );
 }

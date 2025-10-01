@@ -3,7 +3,7 @@ import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-8 text-center">
+    <footer className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-8 text-center" id="footer">
       <p className="text-sm mb-4 opacity-80">
         © 2025 Gouse Portfolio | All Rights Reserved
       </p>
