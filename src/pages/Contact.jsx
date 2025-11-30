@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FaPaperPlane, FaEnvelope, FaMapMarkerAlt, FaUser, FaComment, FaPhone } from 'react-icons/fa';
+import { FaPaperPlane, FaEnvelope, FaUser, FaComment } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -223,7 +223,7 @@ const Contact = () => {
             </motion.div>
 
             {/* Header */}
-            <div className="text-center lg:text-left">
+            <div className="text-center">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>
                 Let's Work
                 <span className="block gradient-text">Together</span>

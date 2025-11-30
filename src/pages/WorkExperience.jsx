@@ -204,8 +204,8 @@ const WorkExperience = () => {
                               <h3 className="text-xl sm:text-2xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>
                                 {exp.role}
                               </h3>
-                              <div className="flex items-center gap-2 text-base font-semibold transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>
-                                <FaBuilding className="w-4 h-4" />
+                              <div className="flex items-center gap-2 text-xs font-semibold transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>
+                                <FaBuilding className="w-3 h-3" />
                                 <span>{exp.company}</span>
                               </div>
                             </div>
@@ -214,7 +214,7 @@ const WorkExperience = () => {
                               whileInView={{ opacity: 1, scale: 1 }}
                               viewport={{ once: true }}
                               transition={{ delay: index * 0.2 + 0.7 }}
-                              className="px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-300"
+                              className="px-4 py-2 rounded-lg text-xs font-medium border transition-all duration-300"
                               style={{ 
                                 backgroundColor: 'var(--overlay-light)', 
                                 color: 'var(--accent-primary)',
@@ -232,7 +232,7 @@ const WorkExperience = () => {
                           whileInView={{ opacity: 1 }}
                           viewport={{ once: true }}
                           transition={{ delay: index * 0.2 + 0.8 }}
-                          className="text-base sm:text-lg leading-relaxed mb-6 transition-colors duration-300" 
+                          className="text-sm leading-relaxed mb-6 transition-colors duration-300" 
                           style={{ color: 'var(--text-secondary)' }}
                         >
                           {exp.description}
@@ -282,7 +282,7 @@ const WorkExperience = () => {
                             >
                               <FaAward className="w-5 h-5 text-yellow-500 dark:text-yellow-400" />
                             </motion.div>
-                            <span className="text-sm font-medium transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
+                            <span className="text-xs font-medium transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
                               {exp.achievements.join(', ')}
                             </span>
                           </motion.div>
