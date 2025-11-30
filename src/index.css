@@ -161,3 +161,33 @@ body {
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
+
+/* Hide scrollbar for mobile navbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
+
+/* Responsive navbar container to prevent collision with theme toggle */
+.nav-container-responsive {
+  max-width: calc(100vw - 240px);
+  width: calc(100vw - 240px);
+}
+
+@media (min-width: 640px) {
+  .nav-container-responsive {
+    max-width: calc(100vw - 220px);
+    width: calc(100vw - 220px);
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-container-responsive {
+    max-width: none;
+    width: auto;
+  }
+}

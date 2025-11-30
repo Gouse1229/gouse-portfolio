@@ -75,7 +75,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" ref={sectionRef} className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-gradient-theme relative transition-all duration-300">
+    <section id="skills" ref={sectionRef} className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 lg:pt-32 bg-gradient-theme relative transition-all duration-300">
       {/* Animated Section Divider */}
       <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
         <motion.div
