@@ -9,11 +9,17 @@ const Contact = () => {
     message: '',
   });
   const [status, setStatus] = useState('');
+  const [errors, setErrors] = useState({});
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: '' });
+    }
   };
 
   const validateEmail = (email) => {
@@ -21,13 +27,44 @@ const Contact = () => {
     return emailRegex.test(email);
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Name validation: min 2, max 100 characters
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    } else if (formData.name.trim().length > 100) {
+      newErrors.name = 'Name must be less than 100 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Message validation: min 10, max 1000 characters
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    } else if (formData.message.trim().length > 1000) {
+      newErrors.message = 'Message must be less than 1000 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate email format
-    if (!validateEmail(formData.email)) {
+    // Validate all fields
+    if (!validateForm()) {
       setStatus('error');
-      setTimeout(() => setStatus(''), 3000);
       return;
     }
 
@@ -51,6 +88,7 @@ const Contact = () => {
         console.log('Message sent successfully:', data.message);
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        setErrors({});
         setTimeout(() => setStatus(''), 3000);
       } else {
         console.error('Error:', data.error || data.message || 'Failed to send message');
@@ -85,16 +123,16 @@ const Contact = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-center min-h-[400px]"
+            className="flex flex-col justify-center min-h-[300px] sm:min-h-[400px] mb-8 lg:mb-0"
           >
             {/* Animated Visual Element */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex justify-center mb-6"
+              className="flex justify-center mb-4 sm:mb-6"
             >
-              <div className="relative w-48 h-48">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48">
                 {/* Animated Background Circle */}
                 <motion.div
                   animate={{
@@ -129,9 +167,9 @@ const Contact = () => {
                   }}
                   className="relative z-10 w-full h-full flex items-center justify-center"
                 >
-                  <div className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-2xl"
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-2xl"
                     style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
-                    <FaEnvelope className="w-16 h-16 text-white" />
+                    <FaEnvelope className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white" />
                   </div>
                 </motion.div>
 
@@ -185,12 +223,12 @@ const Contact = () => {
             </motion.div>
 
             {/* Header */}
-            <div className="text-center">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>
+            <div className="text-center lg:text-left">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>
                 Let's Work
                 <span className="block gradient-text">Together</span>
               </h2>
-              <p className="text-sm leading-relaxed transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-xs sm:text-sm leading-relaxed transition-colors duration-300 px-4 sm:px-0" style={{ color: 'var(--text-secondary)' }}>
                 Have a project in mind? I'd love to hear from you. Send me a message and I'll respond as soon as possible.
               </p>
             </div>
@@ -203,12 +241,12 @@ const Contact = () => {
             viewport={{ once: true }}
             className="w-full max-w-md mx-auto lg:mx-0"
           >
-            <div className="rounded-2xl p-5 shadow-lg border transition-all duration-300" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
-              <h3 className="text-lg font-bold mb-5 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>Contact us</h3>
-              <form onSubmit={handleSubmit} className="space-y-3.5">
+            <div className="rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-lg border transition-all duration-300" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+              <h3 className="text-base sm:text-lg font-bold mb-4 sm:mb-5 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>Contact us</h3>
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
                 <div>
                   <div className="relative">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300" style={{ color: 'var(--text-tertiary)' }}>
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300" style={{ color: errors.name ? 'rgb(239, 68, 68)' : 'var(--text-tertiary)' }}>
                       <FaUser className="w-4 h-4" />
                     </div>
                     <input
@@ -217,12 +255,12 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      required
+                      maxLength={100}
                       className="w-full pl-12 pr-4 py-2.5 rounded-lg focus:outline-none focus:ring-2 transition-all text-sm"
                       style={{ 
                         backgroundColor: 'var(--bg-secondary)', 
                         color: 'var(--text-primary)',
-                        border: '1px solid var(--border-primary)'
+                        border: `1px solid ${errors.name ? 'rgb(239, 68, 68)' : 'var(--border-primary)'}`
                       }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor = 'var(--accent-primary)';
@@ -230,17 +268,23 @@ const Contact = () => {
                         e.currentTarget.parentElement.querySelector('div').style.color = 'var(--accent-primary)';
                       }}
                       onBlur={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--border-primary)';
+                        e.currentTarget.style.borderColor = errors.name ? 'rgb(239, 68, 68)' : 'var(--border-primary)';
                         e.currentTarget.style.boxShadow = 'none';
-                        e.currentTarget.parentElement.querySelector('div').style.color = 'var(--text-tertiary)';
+                        e.currentTarget.parentElement.querySelector('div').style.color = errors.name ? 'rgb(239, 68, 68)' : 'var(--text-tertiary)';
                       }}
-                      placeholder="Name"
+                      placeholder="Name (min 2 characters)"
                     />
                   </div>
+                  {errors.name && (
+                    <p className="text-xs text-red-500 mt-1 ml-1">{errors.name}</p>
+                  )}
+                  {formData.name && !errors.name && (
+                    <p className="text-xs text-gray-500 mt-1 ml-1">{formData.name.length}/100 characters</p>
+                  )}
                 </div>
                 <div>
                   <div className="relative">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300" style={{ color: 'var(--text-tertiary)' }}>
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300" style={{ color: errors.email ? 'rgb(239, 68, 68)' : 'var(--text-tertiary)' }}>
                       <FaEnvelope className="w-4 h-4" />
                     </div>
                     <input
@@ -249,12 +293,11 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
                       className="w-full pl-12 pr-4 py-2.5 rounded-lg focus:outline-none focus:ring-2 transition-all text-sm"
                       style={{ 
                         backgroundColor: 'var(--bg-secondary)', 
                         color: 'var(--text-primary)',
-                        border: '1px solid var(--border-primary)'
+                        border: `1px solid ${errors.email ? 'rgb(239, 68, 68)' : 'var(--border-primary)'}`
                       }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor = 'var(--accent-primary)';
@@ -262,17 +305,20 @@ const Contact = () => {
                         e.currentTarget.parentElement.querySelector('div').style.color = 'var(--accent-primary)';
                       }}
                       onBlur={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--border-primary)';
+                        e.currentTarget.style.borderColor = errors.email ? 'rgb(239, 68, 68)' : 'var(--border-primary)';
                         e.currentTarget.style.boxShadow = 'none';
-                        e.currentTarget.parentElement.querySelector('div').style.color = 'var(--text-tertiary)';
+                        e.currentTarget.parentElement.querySelector('div').style.color = errors.email ? 'rgb(239, 68, 68)' : 'var(--text-tertiary)';
                       }}
                       placeholder="Email"
                     />
                   </div>
+                  {errors.email && (
+                    <p className="text-xs text-red-500 mt-1 ml-1">{errors.email}</p>
+                  )}
                 </div>
                 <div>
                   <div className="relative">
-                    <div className="absolute left-4 top-4 transition-colors duration-300" style={{ color: 'var(--text-tertiary)' }}>
+                    <div className="absolute left-4 top-4 transition-colors duration-300" style={{ color: errors.message ? 'rgb(239, 68, 68)' : 'var(--text-tertiary)' }}>
                       <FaComment className="w-4 h-4" />
                     </div>
                     <textarea
@@ -280,13 +326,13 @@ const Contact = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      required
+                      maxLength={1000}
                       rows="5"
                       className="w-full pl-12 pr-4 py-2.5 rounded-lg focus:outline-none focus:ring-2 transition-all resize-none text-sm"
                       style={{ 
                         backgroundColor: 'var(--bg-secondary)', 
                         color: 'var(--text-primary)',
-                        border: '1px solid var(--border-primary)'
+                        border: `1px solid ${errors.message ? 'rgb(239, 68, 68)' : 'var(--border-primary)'}`
                       }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor = 'var(--accent-primary)';
@@ -294,13 +340,19 @@ const Contact = () => {
                         e.currentTarget.parentElement.querySelector('div').style.color = 'var(--accent-primary)';
                       }}
                       onBlur={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--border-primary)';
+                        e.currentTarget.style.borderColor = errors.message ? 'rgb(239, 68, 68)' : 'var(--border-primary)';
                         e.currentTarget.style.boxShadow = 'none';
-                        e.currentTarget.parentElement.querySelector('div').style.color = 'var(--text-tertiary)';
+                        e.currentTarget.parentElement.querySelector('div').style.color = errors.message ? 'rgb(239, 68, 68)' : 'var(--text-tertiary)';
                       }}
-                      placeholder="Message"
+                      placeholder="Message (min 10 characters)"
                     />
                   </div>
+                  {errors.message && (
+                    <p className="text-xs text-red-500 mt-1 ml-1">{errors.message}</p>
+                  )}
+                  {formData.message && !errors.message && (
+                    <p className="text-xs text-gray-500 mt-1 ml-1">{formData.message.length}/1000 characters</p>
+                  )}
                 </div>
               <motion.button
                 type="submit"
@@ -336,7 +388,7 @@ const Contact = () => {
                   ✓ Message sent successfully! I'll get back to you soon.
                 </motion.div>
               )}
-              {status === 'error' && (
+              {status === 'error' && Object.keys(errors).length === 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}

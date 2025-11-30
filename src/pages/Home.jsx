@@ -57,7 +57,7 @@ const Home = () => {
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[size:24px_24px]" style={{ backgroundImage: `linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px)` }}></div>
 
-      <div className="relative z-10 h-[calc(100vh-5rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-4">
+      <div className="relative z-10 min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-4">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             variants={containerVariants}
@@ -66,7 +66,7 @@ const Home = () => {
             className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center"
           >
             {/* Left Content */}
-            <motion.div variants={itemVariants} className="space-y-3 -mt-2">
+            <motion.div variants={itemVariants} className="space-y-2 sm:space-y-3 -mt-2 text-center lg:text-left">
               {/* Badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -82,23 +82,23 @@ const Home = () => {
               {/* Name */}
               <motion.h1
                 variants={itemVariants}
-                className="text-3xl sm:text-4xl lg:text-4xl font-bold leading-tight"
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
               >
                 <span className="transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>Hi, I'm </span>
-                <span className="gradient-text whitespace-nowrap">Gouse Mohiddin</span>
+                <span className="gradient-text break-words">Gouse Mohiddin</span>
               </motion.h1>
 
               {/* Surname */}
               <motion.div
                 variants={itemVariants}
-                className="text-3xl sm:text-4xl lg:text-4xl font-bold transition-colors duration-300"
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold transition-colors duration-300"
                 style={{ color: 'var(--text-primary)' }}
               >
                 <span className="gradient-text">Shaik</span>
               </motion.div>
 
               {/* Title Animation */}
-              <motion.div variants={itemVariants} className="h-8">
+              <motion.div variants={itemVariants} className="h-6 sm:h-8 min-h-[1.5rem] sm:min-h-[2rem]">
                 <TypeAnimation
                   sequence={[
                     'Java Full-Stack Developer',
@@ -112,7 +112,7 @@ const Home = () => {
                   ]}
                   wrapper="span"
                   speed={50}
-                  className="text-base sm:text-lg font-semibold block transition-colors duration-300"
+                  className="text-sm sm:text-base lg:text-lg font-semibold block transition-colors duration-300"
                   style={{ color: 'var(--accent-primary)' }}
                   repeat={Infinity}
                 />
@@ -121,7 +121,7 @@ const Home = () => {
               {/* CTA Buttons */}
               <motion.div
                 variants={itemVariants}
-                className="flex flex-col sm:flex-row gap-2 pt-1"
+                className="flex flex-col sm:flex-row gap-2 pt-1 justify-center lg:justify-start"
               >
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
@@ -154,7 +154,7 @@ const Home = () => {
               <motion.div
                 initial={{ opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex gap-4 pt-1"
+                className="flex gap-4 pt-1 justify-center lg:justify-start"
               >
                 <motion.a
                   href="https://www.linkedin.com/in/gouse-mohiddin-shaik-2682b720b/"
@@ -212,7 +212,7 @@ const Home = () => {
             {/* Right - Clean Circular Photo */}
             <motion.div
               variants={itemVariants}
-              className="flex justify-center lg:justify-center relative"
+              className="flex justify-center lg:justify-center relative mt-8 lg:mt-0"
             >
               <div className="relative">
                 {/* Animated Rotating Border */}
@@ -222,7 +222,7 @@ const Home = () => {
                   className="absolute inset-0 rounded-full z-10"
                   style={{
                     background: 'conic-gradient(from 0deg, #6366f1, #06b6d4, #8b5cf6, #ec4899, #6366f1)',
-                    padding: '5px',
+                    padding: '4px',
                     WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                     WebkitMaskComposite: 'xor',
                     maskComposite: 'exclude',
@@ -243,7 +243,7 @@ const Home = () => {
                 ></motion.div>
                 
                 {/* Photo Container - Simple Circle */}
-                <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden shadow-2xl border-4 transition-colors duration-300" style={{ borderColor: 'var(--card-bg)' }}>
+                <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden shadow-2xl border-4 transition-colors duration-300" style={{ borderColor: 'var(--card-bg)' }}>
                   <img
                     src={latest_photo}
                     alt="Gouse Mohiddin Shaik"
@@ -258,10 +258,10 @@ const Home = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="absolute -bottom-4 -right-4 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white px-5 py-2.5 rounded-xl shadow-xl z-30"
+                  className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-lg sm:rounded-xl shadow-xl z-30"
                 >
-                  <div className="text-xl font-bold">5+</div>
-                  <div className="text-xs font-medium">Years Exp</div>
+                  <div className="text-lg sm:text-xl font-bold">5+</div>
+                  <div className="text-[10px] sm:text-xs font-medium">Years Exp</div>
                 </motion.div>
 
                 {/* Decorative Dots */}
@@ -303,24 +303,24 @@ const Home = () => {
       </div>
 
       {/* About Me Section */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="mb-20"
+          className="mb-12 sm:mb-20"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left Side - Profile Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="flex justify-center lg:justify-center"
+              className="flex justify-center lg:justify-center order-2 lg:order-1"
             >
               <div className="relative mx-auto">
-                <div className="w-72 h-80 sm:w-80 sm:h-96 rounded-2xl overflow-hidden border-8 shadow-2xl transition-colors duration-300" style={{ borderColor: 'var(--card-bg)' }}>
+                <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] h-auto aspect-[9/10] rounded-2xl overflow-hidden border-4 sm:border-8 shadow-2xl transition-colors duration-300" style={{ borderColor: 'var(--card-bg)' }}>
                   <img
                     src={about_photo}
                     alt="Gouse Mohiddin Shaik on bike"
@@ -337,22 +337,22 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6 order-1 lg:order-2"
             >
               {/* Small Heading */}
-              <div className="text-lg font-medium transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>
+              <div className="text-base sm:text-lg font-medium transition-colors duration-300 text-center lg:text-left" style={{ color: 'var(--accent-primary)' }}>
                 How About Me ?
               </div>
 
               {/* Description */}
-              <p className="text-lg leading-relaxed transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-sm sm:text-base lg:text-lg leading-relaxed transition-colors duration-300 text-center lg:text-left" style={{ color: 'var(--text-secondary)' }}>
                 Technical Associate and Java Full-Stack Developer with <span className="font-bold transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>5+ years</span> building enterprise web applications across DNS management, legal tech, and survey platforms.
                 I specialize in Java and Spring Boot on the backend, combined with modern frontend technologies, to deliver scalable, reliable services and clean, maintainable UIs.
                 I enjoy turning complex business requirements into production-ready solutions that are performant, secure, and easy to use.
               </p>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-4">
+              <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-4">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -360,8 +360,8 @@ const Home = () => {
                   transition={{ delay: 0.4 }}
                   className="text-center"
                 >
-                  <div className="text-4xl sm:text-5xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>3+</div>
-                  <div className="text-xs sm:text-sm font-medium leading-tight transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>3+</div>
+                  <div className="text-[10px] sm:text-xs lg:text-sm font-medium leading-tight transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
                     Projects<br />Delivered
                   </div>
                 </motion.div>
@@ -372,8 +372,8 @@ const Home = () => {
                   transition={{ delay: 0.5 }}
                   className="text-center"
                 >
-                  <div className="text-4xl sm:text-5xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>3+</div>
-                  <div className="text-xs sm:text-sm font-medium leading-tight transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>3+</div>
+                  <div className="text-[10px] sm:text-xs lg:text-sm font-medium leading-tight transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
                     Business<br />Domains
                   </div>
                 </motion.div>
@@ -384,8 +384,8 @@ const Home = () => {
                   transition={{ delay: 0.6 }}
                   className="text-center"
                 >
-                  <div className="text-4xl sm:text-5xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>3+</div>
-                  <div className="text-xs sm:text-sm font-medium leading-tight transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>3+</div>
+                  <div className="text-[10px] sm:text-xs lg:text-sm font-medium leading-tight transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
                     Awards &<br />Recognition
                   </div>
                 </motion.div>
