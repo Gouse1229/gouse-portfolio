@@ -1,146 +1,216 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import {
-  FaJava,
-  FaHtml5,
-  FaCss3Alt,
-  FaJsSquare,
+  FaJava, FaHtml5, FaCss3Alt, FaJsSquare,
 } from 'react-icons/fa';
 import {
-  SiJquery,
-  SiSpring,
-  SiOracle,
-  SiMysql,
-  SiBitbucket,
-  SiGithub,
-  SiApachemaven,
-  SiJenkins,
-  SiJira,
-  SiEclipseide,
-  SiIntellijidea,
-  SiReact,
+  SiSpring, SiOracle, SiHibernate, SiGithub, SiApachemaven, SiJenkins, SiJira,
+  SiReact, SiJquery, SiDocker, SiKubernetes, SiIntellijidea, SiEclipseide,
 } from 'react-icons/si';
-import { Link } from 'react-router-dom';
-
-// Animation variants
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const card = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
-};
-
-const stagger = {
-  visible: { transition: { staggerChildren: 0.2 } },
-};
 
 const Skills = () => {
+  const [hoveredSkill, setHoveredSkill] = useState(null);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   const skillCategories = [
     {
-      category: 'Technologies',
+      title: 'Backend Development',
+      icon: '⚙️',
       skills: [
-        { name: 'Core Java', icon: <FaJava className="w-5 h-5 text-teal-500" />, description: 'Building robust backend systems with Java.' },
-        { name: 'HTML', icon: <FaHtml5 className="w-5 h-5 text-teal-500" />, description: 'Crafting semantic and accessible web structures.' },
-        { name: 'CSS', icon: <FaCss3Alt className="w-5 h-5 text-teal-500" />, description: 'Styling responsive and modern UI with CSS.' },
-        { name: 'JavaScript', icon: <FaJsSquare className="w-5 h-5 text-teal-500" />, description: 'Creating dynamic and interactive web apps.' },
-        { name: 'jQuery', icon: <SiJquery className="w-5 h-5 text-teal-500" />, description: 'Simplifying DOM manipulation and events.' },
-        { name: 'Spring Core', icon: <SiSpring className="w-5 h-5 text-teal-500" />, description: 'Dependency injection and IoC with Spring.' },
-        { name: 'Spring MVC', icon: <SiSpring className="w-5 h-5 text-teal-500" />, description: 'Building web apps with Spring MVC.' },
-        { name: 'Spring Boot', icon: <SiSpring className="w-5 h-5 text-teal-500" />, description: 'Rapid API development with Spring Boot.' },
-        { name: 'Hibernate/JPA', icon: <span className="w-5 h-5 text-teal-500">[H]</span>, description: 'ORM for seamless database interactions.' },
-        { name: 'JSP', icon: <span className="w-5 h-5 text-teal-500">[J]</span>, description: 'Server-side rendering with Java Server Pages.' },
-        { name: 'Microservices', icon: <span className="w-5 h-5 text-teal-500">[M]</span>, description: 'Developing distributed systems with microservices.' },
+        { name: 'Java', icon: <FaJava className="w-8 h-8" />, level: 90, color: 'from-orange-500 to-red-500' },
+        { name: 'Spring Boot', icon: <SiSpring className="w-8 h-8" />, level: 90, color: 'from-green-500 to-emerald-500' },
+        { name: 'Spring MVC', icon: <SiSpring className="w-8 h-8" />, level: 80, color: 'from-green-500 to-emerald-500' },
+        { name: 'Oracle', icon: <SiOracle className="w-8 h-8" />, level: 80, color: 'from-red-500 to-orange-500' },
+        { name: 'JPA/Hibernate', icon: <SiHibernate className="w-8 h-8" />, level: 80, color: 'from-purple-500 to-indigo-500' },
       ],
     },
     {
-      category: 'Tools',
+      title: 'Frontend Development',
+      icon: '🎨',
       skills: [
-        { name: 'Oracle', icon: <SiOracle className="w-5 h-5 text-teal-500" />, description: 'Managing enterprise-grade databases.' },
-        { name: 'MySQL', icon: <SiMysql className="w-5 h-5 text-teal-500" />, description: 'Efficient relational database management.' },
-        { name: 'Bitbucket', icon: <SiBitbucket className="w-5 h-5 text-teal-500" />, description: 'Git-based source code management.' },
-        { name: 'GitHub', icon: <SiGithub className="w-5 h-5 text-teal-500" />, description: 'Git-based source code management.' },
-        { name: 'Maven', icon: <SiApachemaven className="w-5 h-5 text-teal-500" />, description: 'Automating builds and dependency management.' },
-        { name: 'Jenkins', icon: <SiJenkins className="w-5 h-5 text-teal-500" />, description: 'Continuous integration and deployment.' },
-        { name: 'JIRA', icon: <SiJira className="w-5 h-5 text-teal-500" />, description: 'Agile project management and issue tracking.' },
-        { name: 'CMIX', icon: <span className="w-5 h-5 text-teal-500">[C]</span>, description: 'Survey Programming tool.' },
-        { name: 'Eclipse', icon: <SiEclipseide className="w-5 h-5 text-teal-500" />, description: 'Java development IDE.' },
-        { name: 'IntelliJ IDEA', icon: <SiIntellijidea className="w-5 h-5 text-teal-500" />, description: 'Advanced IDE for Java and more.' },
+        { name: 'HTML5', icon: <FaHtml5 className="w-8 h-8" />, level: 90, color: 'from-orange-500 to-red-500' },
+        { name: 'CSS3', icon: <FaCss3Alt className="w-8 h-8" />, level: 80, color: 'from-blue-500 to-cyan-500' },
+        { name: 'JavaScript', icon: <FaJsSquare className="w-8 h-8" />, level: 80, color: 'from-yellow-500 to-orange-500' },
+        { name: 'React', icon: <SiReact className="w-8 h-8" />, level: 70, color: 'from-cyan-500 to-blue-500' },
+        { name: 'jQuery', icon: <SiJquery className="w-8 h-8" />, level: 80, color: 'from-blue-500 to-indigo-500' },
       ],
     },
     {
-      category: 'Learning in Progress',
+      title: 'Tools & DevOps',
+      icon: '🛠️',
       skills: [
-        { name: 'Thymeleaf', icon: <span className="w-5 h-5 text-teal-500">[T]</span>, description: 'Templating engine for server-side rendering.' },
-        { name: 'React', icon: <SiReact className="w-5 h-5 text-teal-500" />, description: 'Building dynamic UI with React.' },
+        { name: 'GitHub', icon: <SiGithub className="w-8 h-8" />, level: 90, color: 'from-gray-700 to-gray-900' },
+        { name: 'Maven', icon: <SiApachemaven className="w-8 h-8" />, level: 88, color: 'from-orange-500 to-red-500' },
+        { name: 'Jenkins', icon: <SiJenkins className="w-8 h-8" />, level: 75, color: 'from-blue-500 to-cyan-500' },
+        { name: 'JIRA', icon: <SiJira className="w-8 h-8" />, level: 85, color: 'from-blue-500 to-indigo-500' },
+        { name: 'Docker', icon: <SiDocker className="w-8 h-8" />, level: 80, color: 'from-blue-500 to-cyan-500' },
+        { name: 'Kubernetes', icon: <SiKubernetes className="w-8 h-8" />, level: 75, color: 'from-blue-600 to-indigo-600' },
+        { name: 'IntelliJ IDEA', icon: <SiIntellijidea className="w-8 h-8" />, level: 90, color: 'from-purple-500 to-pink-500' },
+        { name: 'Eclipse', icon: <SiEclipseide className="w-8 h-8" />, level: 85, color: 'from-purple-600 to-indigo-600' },
       ],
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 py-12 px-4 sm:px-6 lg:px-8">
-      <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={fadeIn}
-        className="text-center mb-12"
-      >
-        <h1 className="text-3xl sm:text-4xl font-bold text-teal-500 mb-4">
-          My Skills
-        </h1>
-        <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-          A comprehensive set of technical skills honed over 5+ years of experience in Java Full-Stack development.
-        </p>
-      </motion.section>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
-      {skillCategories.map((category, index) => (
-        <div key={index} className="mb-12">
-          <h2 className="text-2xl font-semibold text-teal-500 mb-6 text-center sm:text-left">
-            {category.category}
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
+  };
+
+  return (
+    <section id="skills" ref={sectionRef} className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-gradient-theme relative transition-all duration-300">
+      {/* Animated Section Divider */}
+      <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: '100%' }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="h-full transition-all duration-300"
+          style={{ background: 'linear-gradient(to right, transparent, var(--accent-primary), transparent)' }}
+        ></motion.div>
+      </div>
+
+      <div className="max-w-7xl mx-auto">
+        {/* Header - Compact */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>
+            Technical
+            <span className="block gradient-text">Proficiency</span>
           </h2>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="visible"
-            className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-6"
-          >
-            {category.skills.map((skill, skillIndex) => (
-              <motion.div
-                key={skillIndex}
-                variants={card}
-                whileHover={{ scale: 1.05, boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}
-                className="group relative bg-white p-3 rounded-md shadow-md border border-teal-500/20 flex items-center space-x-3"
-              >
-                {skill.icon && <div className="flex-shrink-0">{skill.icon}</div>}
-                <p className="text-gray-600 text-xs sm:text-sm font-medium truncate">{skill.name}</p>
-                <div className="absolute left-0 right-0 bottom-full mb-2 hidden sm:block bg-teal-500/90 text-white text-xs p-2 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                  {skill.description}
-                </div>
-                <div className="absolute left-0 right-0 top-full mt-2 block sm:hidden bg-teal-500/90 text-white text-xs p-2 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                  {skill.description}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      ))}
-      <motion.section
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
-            className="text-center mt-12"
-          >
-            <Link
-              to="/about"
-              className="inline-block px-6 py-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-md transition-transform duration-200 hover:scale-105"
+        </motion.div>
+
+        {/* Skills Categories - Compact Design */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="space-y-10"
+        >
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={categoryIndex}
+              variants={itemVariants}
+              className="rounded-2xl p-6 shadow-md border transition-all duration-300"
+              style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}
             >
-              Back to About
-            </Link>
-          </motion.section>
-    </div>
-    
+              {/* Category Header - Compact */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="text-2xl">{category.icon}</div>
+                <h3 className="text-xl font-bold transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{category.title}</h3>
+              </div>
+
+              {/* Skills Grid - Compact Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skillIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: skillIndex * 0.03 }}
+                    onMouseEnter={() => setHoveredSkill(`${categoryIndex}-${skillIndex}`)}
+                    onMouseLeave={() => setHoveredSkill(null)}
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    className="relative group cursor-pointer"
+                  >
+                    <div className={`bg-gradient-to-br ${skill.color} rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300`}>
+                      {/* Icon */}
+                      <div className="text-white mb-3 flex justify-center">
+                        {skill.icon}
+                      </div>
+                      
+                      {/* Name */}
+                      <div className="text-center">
+                        <div className="text-white font-semibold text-xs mb-1">{skill.name}</div>
+                        {category.title !== 'Tools & DevOps' && (
+                          <div className="text-white/70 text-xs">{skill.level}%</div>
+                        )}
+                      </div>
+
+                      {/* Progress Bar - Compact (Hidden for Tools & DevOps) */}
+                      {category.title !== 'Tools & DevOps' && (
+                        <div className="mt-3 h-1 bg-white/20 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${skill.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: skillIndex * 0.05 }}
+                            className="h-full bg-white rounded-full"
+                          ></motion.div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Hover Tooltip - Hidden for Tools & DevOps */}
+                    {hoveredSkill === `${categoryIndex}-${skillIndex}` && category.title !== 'Tools & DevOps' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-700 text-white px-2 py-1 rounded-md text-xs font-medium whitespace-nowrap z-10"
+                      >
+                        {skill.level}% Proficiency
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 border-r-3 border-t-3 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Learning Section - Compact */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-2xl p-6 text-white shadow-xl max-w-4xl mx-auto"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs font-semibold mb-1 opacity-90">Currently Learning</div>
+              <h3 className="text-lg font-bold">Cloud Technologies(AWS)</h3>
+            </div>
+            <div className="text-3xl">🚀</div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Animated Section Divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: '100%' }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="h-full bg-gradient-to-r from-transparent via-indigo-300 dark:via-indigo-600 to-transparent"
+        ></motion.div>
+      </div>
+    </section>
   );
 };
 

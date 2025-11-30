@@ -1,31 +1,33 @@
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Blog from './pages/Blog';
 import Footer from './components/Footer';
 import './App.css';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-import Skills from './pages/Skills';
-import NewChatbot from './components/NewChatbot'
+
+// Lazy load pages
+const Portfolio = lazy(() => import('./pages/Portfolio'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Loading component
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="text-center">
+      <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-gray-900 border-t-transparent"></div>
+    </div>
+  </div>
+);
 
 function App() {
   return (
     <div className="App flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow overflow-y-auto">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About/>}/>
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/skills" element={<Skills/>}/>
-        </Routes>
+      <main className="flex-grow">
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Portfolio />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
-      <NewChatbot/>
     </div>
   );
 }

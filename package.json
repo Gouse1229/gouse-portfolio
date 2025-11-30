@@ -1,8 +1,7 @@
 {
   "name": "my-portfolio",
   "private": true,
-  "version": "0.0.0",
-  "type": "commonjs",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,16 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@tailwindcss/postcss": "^4.1.4",
     "autoprefixer": "^10.4.21",
-    "axios": "^1.9.0",
     "framer-motion": "^12.8.0",
     "gsap": "^3.13.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-google-recaptcha": "^3.1.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
     "react-router-dom": "^6.30.0",

@@ -9,7 +9,7 @@ const fadeIn = {
 
 const Blog = () => {
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+    <section id="blog" className="min-h-screen bg-gray-100 text-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <motion.section
         initial="hidden"
         animate="visible"
@@ -23,7 +23,7 @@ const Blog = () => {
           Coming soon! Stay tuned for insights on Java development and technology trends.
         </p>
       </motion.section>
-    </div>
+    </section>
   );
 };
 

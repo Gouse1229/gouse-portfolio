@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { FaDownload } from 'react-icons/fa';
 import resumePDF from '../assets/resume.pdf';
 
-// Animation variants for mobile menu
-const menuVariants = {
-  hidden: { opacity: 0, x: '100%' },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
-  exit: { opacity: 0, x: '100%', transition: { duration: 0.2 } },
-};
-
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
@@ -22,126 +21,56 @@ function Navbar() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    if (isOpen) toggleMenu();
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <nav className="bg-gray-700 text-white shadow-md p-3 sm:p-4 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <div className="text-xl sm:text-2xl font-bold text-teal-500">
-          Gouse Portfolio
-        </div>
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <motion.button
+            onClick={scrollToTop}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`text-2xl font-bold transition-colors ${
+              scrolled
+                ? 'gradient-text'
+                : 'text-white'
+            }`}
+          >
+            Gouse
+          </motion.button>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
-          <Link
-            to="/"
-            className="text-gray-300 hover:text-teal-500 font-medium transition-transform duration-200 hover:scale-105"
-          >
-            Home
-          </Link>
-          <Link
-            to="/projects"
-            className="text-gray-300 hover:text-teal-500 font-medium transition-transform duration-200 hover:scale-105"
-          >
-            Projects
-          </Link>
-          <Link
-            to="/blog"
-            className="text-gray-300 hover:text-teal-500 font-medium transition-transform duration-200 hover:scale-105"
-          >
-            Blog
-          </Link>
-          <Link
-            to="/contact"
-            className="text-gray-300 hover:text-teal-500 font-medium transition-transform duration-200 hover:scale-105"
-          >
-            Contact
-          </Link>
-          <button
+          {/* Resume Button */}
+          <motion.button
             onClick={handleDownloadResume}
-            className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md font-medium transition-transform duration-200 hover:scale-105"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className={`flex items-center gap-2 px-6 py-3 font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl ${
+              scrolled
+                ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white'
+                : 'bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white'
+            }`}
+            aria-label="Download Resume"
           >
-            Resume
-          </button>
-        </div>
-
-        {/* Mobile Hamburger Icon */}
-        <div className="md:hidden flex items-center">
-          <button
-            onClick={toggleMenu}
-            className="text-gray-300 focus:outline-none"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}
-              />
-            </svg>
-          </button>
+            <FaDownload className="w-4 h-4" />
+            <span className="hidden sm:inline">Resume</span>
+          </motion.button>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            variants={menuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="md:hidden bg-gray-800 bg-opacity-90 shadow-md mt-2 rounded-md overflow-hidden"
-          >
-            <div className="flex flex-col items-center py-4 space-y-4">
-              <Link
-                to="/"
-                onClick={toggleMenu}
-                className="text-gray-300 hover:text-teal-500 font-medium text-base"
-              >
-                Home
-              </Link>
-              <Link
-                to="/projects"
-                onClick={toggleMenu}
-                className="text-gray-300 hover:text-teal-500 font-medium text-base"
-              >
-                Projects
-              </Link>
-              <Link
-                to="/blog"
-                onClick={toggleMenu}
-                className="text-gray-300 hover:text-teal-500 font-medium text-base"
-              >
-                Blog
-              </Link>
-              <Link
-                to="/contact"
-                onClick={toggleMenu}
-                className="text-gray-300 hover:text-teal-500 font-medium text-base"
-              >
-                Contact
-              </Link>
-              <button
-                onClick={handleDownloadResume}
-                className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md font-medium text-base"
-              >
-                Resume
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const Chatbot = () => {
+const NewChatbot = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([
     { id: 1, sender: "bot", text: "Hi! I’m your portfolio assistant. Ask me anything about my skills, projects, or experience!", feedback: null }
@@ -65,6 +65,8 @@ const Chatbot = () => {
       <button
         onClick={() => setIsChatOpen(!isChatOpen)}
         className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full shadow-lg flex items-center justify-center z-50 transform hover:scale-110 transition-transform duration-300 animate-bounce"
+        aria-label={isChatOpen ? "Close chatbot" : "Open chatbot"}
+        aria-expanded={isChatOpen}
       >
         <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
@@ -80,7 +82,13 @@ const Chatbot = () => {
         {/* Header */}
         <div className="bg-gradient-to-r from-teal-600 to-teal-400 p-3 text-white flex justify-between items-center rounded-t-2xl">
           <span className="font-semibold text-sm md:text-base">Portfolio Assistant</span>
-          <button onClick={() => setIsChatOpen(false)} className="hover:text-gray-200">✕</button>
+          <button 
+            onClick={() => setIsChatOpen(false)} 
+            className="hover:text-gray-200"
+            aria-label="Close chat window"
+          >
+            ✕
+          </button>
         </div>
 
         {/* Messages with animated water bubble background */}
@@ -124,13 +132,17 @@ const Chatbot = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && handleSend()}
+            onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="Ask me about my portfolio..."
             className="flex-1 p-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-400 text-sm"
+            aria-label="Chat input"
+            maxLength={500}
           />
           <button
             onClick={handleSend}
             className="ml-2 bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full text-sm"
+            aria-label="Send message"
+            disabled={!input.trim() || isLoading}
           >
             Send
           </button>
@@ -150,4 +162,4 @@ const Chatbot = () => {
   );
 };
 
-export default Chatbot;
+export default NewChatbot;
